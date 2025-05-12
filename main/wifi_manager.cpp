@@ -53,6 +53,10 @@ void WiFiManager::handleClient() {
   }
 }
 
+String WiFiManager::getDeviceID() {
+  return _devid;
+}
+
 void WiFiManager::_readData() {
   EEPROM.begin(512);
   _ssid = _pass = _devid = "";
@@ -87,7 +91,7 @@ void WiFiManager::_apModeInit() {
   Serial.println("AP Mode. Please connect to http://192.168.4.1 to configure");
   _apMode = true;
   WiFi.mode(WIFI_AP_STA);
-  WiFi.softAP("ESP32_eeprom", "");
+  WiFi.softAP("ESP32_inas", "");
   WiFi.scanNetworks(true);
   Serial.println(WiFi.softAPIP());
   _startWebServer();

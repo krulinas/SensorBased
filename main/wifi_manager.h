@@ -10,6 +10,7 @@ class WiFiManager{
     WiFiManager(int ledPin = 2, int buttonPin = 0);
     void begin();
     void handleClient();
+    String getDeviceID();
 
   private:
     int _ledPin, _buttonPin;

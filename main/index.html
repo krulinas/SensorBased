@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ESP32 Firebase Control</title>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+  <h2>Update Firebase Text</h2>
+  <input type="text" id="newText" placeholder="Enter new message" style="padding: 10px; width: 60%;">
+  <br><br>
+  <button onclick="updateText()" style="padding: 10px 20px;">Send to ESP32</button>
+
+  <p id="status" style="margin-top: 20px; color: green;"></p>
+
+  <script>
+    const firebaseUrl = "https://sensor-based-e1324-default-rtdb.asia-southeast1.firebasedatabase.app/devices/ESP32_01/text.json"; // Adjust device ID path as needed
+
+    function updateText() {
+      const message = document.getElementById("newText").value;
+      fetch(firebaseUrl, {
+        method: "PUT",
+        body: JSON.stringify(message)
+      })
+      .then(res => {
+        if (res.ok) {
+          document.getElementById("status").innerText = "Updated successfully!";
+        } else {
+          document.getElementById("status").innerText = "Update failed.";
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("status").innerText = "Error sending request.";
+      });
+    }
+  </script>
+</body>
+</html>
